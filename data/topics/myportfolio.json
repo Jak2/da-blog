@@ -1,5 +1,5 @@
 {
     "title": "Welcome to my Protfolio",
-    "contentFile": "../pages/myportfolio.md",
+    "contentFile": "./myportfolio.md",
     "slug": "myportfolio"
   }
