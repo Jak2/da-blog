@@ -4,11 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const contentBodyElement = document.getElementById('content-body');
 
     function loadTopic(slug) {
-        fetch(`data/topics/${slug}.json`) // The slug now includes the subfolder
+        fetch(`data/topics/${slug}.json`)
             .then(response => response.json())
             .then(data => {
                 contentTitleElement.textContent = data.title;
-                const contentPath = `data/pages/${data.contentFile}`;
+                const contentPath = `data/pages/${data.contentFile}`; // Directly use the contentFile path
                 fetch(contentPath)
                     .then(response => response.text())
                     .then(markdownContent => {
@@ -32,12 +32,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if (item.children) {
                 const dropdownToggle = document.createElement('span');
                 dropdownToggle.textContent = item.name;
-                dropdownToggle.classList.add('dropdown-toggle');
+                dropdownToggle.classList.add('dropdown-toggle'); // For styling
                 listItem.appendChild(dropdownToggle);
 
                 const dropdownList = document.createElement('ul');
                 dropdownList.classList.add('dropdown-list');
-                renderSidebar(item.children, dropdownList);
+                renderSidebar(item.children, dropdownList); // Recursive call for children
                 listItem.appendChild(dropdownList);
 
                 dropdownToggle.addEventListener('click', function() {
@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(sidebarData => {
             renderSidebar(sidebarData, sidebarLinksContainer);
 
+            // Load the first top-level topic by default (if it's not a dropdown)
             const firstLink = sidebarLinksContainer.querySelector('a[data-slug]');
             if (firstLink) {
                 firstLink.click();

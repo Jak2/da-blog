@@ -4,11 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const contentBodyElement = document.getElementById('content-body');
 
     function loadTopic(slug) {
-        fetch(`data/topics/${slug}.json`) // The slug now includes the subfolder
+        fetch(`data/topics/${slug}.json`)
             .then(response => response.json())
             .then(data => {
                 contentTitleElement.textContent = data.title;
-                const contentPath = `data/pages/${data.contentFile}`;
+                const contentPath = `data/pages/${data.contentFile}`; // Directly use contentFile relative to data/pages/
                 fetch(contentPath)
                     .then(response => response.text())
                     .then(markdownContent => {
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    fetch('data/sidebar.json')
+    fetch('data/topics/sidebar.json')
         .then(response => response.json())
         .then(sidebarData => {
             renderSidebar(sidebarData, sidebarLinksContainer);
