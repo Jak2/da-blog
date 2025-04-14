@@ -1,0 +1,46 @@
+---
+// src/components/Sidebar.astro
+import { sidebarData } from '../data/sidebarData';
+import Icon from 'astro-icon'; // Try this import
+import { useState } from 'react'; // For using React for interactivity
+
+const [openSubMenu, setOpenSubMenu] = useState({});
+
+const toggleSubMenu = (index: string | number) => { // Add basic type
+  setOpenSubMenu((prevState) => ({
+    ...prevState,
+    [index]: !prevState[index],
+  }));
+};
+
+const renderSubMenu = (items: any[], level: number = 0, parentIndex: string | number = '') => { // Add basic types
+  return items && items.map((item: any, index: number) => { // Add basic types
+    const uniqueIndex = parentIndex ? `${parentIndex}-${index}` : `${index}`;
+    const isSubMenuOpen = openSubMenu[uniqueIndex];
+    const marginLeft = level * 4;
+
+    return (
+      <li key={item.text} style={{ marginLeft: `${marginLeft}rem` }}>
+        <a href={item.path} class={`block p-2 rounded-md hover:bg-gray-100 text-gray-600 ${item.nested ? 'justify-between items-center flex' : 'flex items-center'}`}>
+          <span class={`${level > 0 ? 'mr-2' : 'mr-3'} ${level > 0 ? '' : 'w-5 h-5 bg-gray-300 rounded-full flex items-center justify-center'}`}>
+            {level > 0 ? '-' : (item.icon ? <Icon name={`bi:${item.icon}`} size={20} /> : 'T')}
+          </span>
+          <span>{item.text}</span>
+          {item.nested && (
+            <button onClick={() => toggleSubMenu(uniqueIndex)}>
+              <svg class={`w-4 h-4 text-gray-500 transform transition-transform ${isSubMenuOpen ? 'rotate-90' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          )}
+        </a>
+        {item.nested && (
+          <ul class={`mt-1 space-y-1 ${isSubMenuOpen ? '' : 'hidden'}`}>
+            {renderSubMenu(item.nested, level + 1, uniqueIndex)}
+          </ul>
+        )}
+      </li>
+    );
+  });
+};
+---

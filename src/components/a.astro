@@ -1,0 +1,79 @@
+---
+// src/components/Sidebar.astro
+import { sidebarData } from '../data/sidebarData';
+import Icon from 'astro-icon'; // For using icons (install @astrojs/icons and astro-icon)
+import { useState } from 'react'; // If you plan to use React for interactivity
+
+const [openSubMenu, setOpenSubMenu] = useState({});
+
+const toggleSubMenu = (index) => {
+  setOpenSubMenu((prevState) => ({
+    ...prevState,
+    [index]: !prevState[index],
+  }));
+};
+
+const renderSubMenu = (items, level = 0, parentIndex = '') => {
+  return items && items.map((item, index) => {
+    const uniqueIndex = parentIndex ? `${parentIndex}-${index}` : `${index}`;
+    const isSubMenuOpen = openSubMenu[uniqueIndex];
+    const marginLeft = level * 4;
+
+    return (
+      <li key={item.text} style={{ marginLeft: `${marginLeft}rem` }}>
+        <a href={item.path} class={`block p-2 rounded-md hover:bg-gray-100 text-gray-600 ${item.nested ? 'justify-between items-center flex' : 'flex items-center'}`}>
+          <span class={`${level > 0 ? 'mr-2' : 'mr-3'} ${level > 0 ? '' : 'w-5 h-5 bg-gray-300 rounded-full flex items-center justify-center'}`}>
+            {level > 0 ? '-' : (item.icon ? <Icon name={`bi:${item.icon}`} size={20} /> : 'T')}
+          </span>
+          <span>{item.text}</span>
+          {item.nested && (
+            <button onClick={() => toggleSubMenu(uniqueIndex)}>
+              <svg class={`w-4 h-4 text-gray-500 transform transition-transform ${isSubMenuOpen ? 'rotate-90' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          )}
+        </a>
+        {item.nested && (
+          <ul class={`mt-1 space-y-1 ${isSubMenuOpen ? '' : 'hidden'}`}>
+            {renderSubMenu(item.nested, level + 1, uniqueIndex)}
+          </ul>
+        )}
+      </li>
+    );
+  });
+};
+---
+
+<aside class="bg-white shadow-md w-64 h-screen p-4 flex flex-col mt-8 ml-4 mb-8 rounded-md">
+  <div class="flex items-center justify-center mb-8">
+    <div class="w-12 h-12 bg-blue-500 rounded-full"></div>
+    <span class="ml-2 text-lg font-semibold">Your Brand</span>
+  </div>
+  <nav class="flex-1 space-y-2">
+    <ul>{renderSubMenu(sidebarData)}</ul>
+  </nav>
+  <div class="mt-8">
+    <div class="flex items-center p-2 rounded-md hover:bg-gray-100 text-gray-600 cursor-pointer">
+      <div class="w-8 h-8 mr-3 bg-gray-400 rounded-full"></div>
+      <span>User Name</span>
+    </div>
+  </div>
+</aside>
+
+<script>
+  import { useState } from 'react';
+  let openSubMenu = {};
+  const setOpenSubMenu = (newState) => {
+    openSubMenu = newState;
+    // Force a re-render if needed (Astro's reactivity is different from React)
+    const aside = document.querySelector('aside');
+    if (aside) {
+      aside.innerHTML = aside.innerHTML; // Simple way to trigger re-render for this example
+    }
+  };
+
+  const toggleSubMenu = (index) => {
+    setOpenSubMenu({...openSubMenu, [index]: !openSubMenu[index]});
+  };
+</script>

@@ -1,0 +1,18 @@
+---
+// src/components/Navbar.astro
+---
+
+<nav class="bg-white shadow-md p-4 flex items-center justify-between">
+    <div class="flex items-center">
+      <button class="lg:hidden mr-4">
+        <svg class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+      <span class="text-lg font-semibold">Your Blog Name</span>
+    </div>
+    <div class="flex items-center space-x-4">
+      <button class="rounded-full w-8 h-8 bg-gray-300"></button>
+      {/* Add more elements here */}
+    </div>
+  </nav>
