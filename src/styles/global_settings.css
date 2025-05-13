@@ -20,11 +20,6 @@
   --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* Enable smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
 /* Base styles */
 html,
 body {
@@ -32,7 +27,6 @@ body {
     "Helvetica Neue", sans-serif;
   color: #000000;
   line-height: 1.6;
-  height: 100%;
 }
 
 /* Global text sizes */
@@ -47,41 +41,6 @@ h2 {
 
 h3, h4, h5, h6 {
   color: #9ca3af; /* Tailwind gray-400 */
-}
-
-/* Sticky navbar */
-.navbar-sticky {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: white;
-}
-
-/* Content sections */
-.content-section {
-  height: calc(100vh - var(--header-height) - 2rem);
-  overflow-y: auto;
-}
-
-/* Sidebar scrolling */
-.sidebar-container {
-  height: calc(100vh - var(--header-height) - 2rem);
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
-}
-
-.sidebar-container::-webkit-scrollbar {
-  width: 6px;
-}
-
-.sidebar-container::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.sidebar-container::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
 }
 
 /* Prose styling for markdown content */
@@ -107,7 +66,7 @@ h3, h4, h5, h6 {
   color: #333333;
 }
 
-.prose h3, .prose h4, .prose h5, .prose h6 {
+ .prose h3, .prose h4, .prose h5, .prose h6 {
   color: #9ca3af;
 }
 
@@ -144,7 +103,7 @@ h3, h4, h5, h6 {
   font-size: 0.8em;
 }
 
-/* Make sections scrollable */
+/* Make section 1 scrollable */
 .overflow-y-auto {
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
@@ -163,16 +122,10 @@ h3, h4, h5, h6 {
   border-radius: 3px;
 }
 
-/* Ensure consistent navbar height */
-.navbar {
-  height: var(--header-height);
-  display: flex;
-  align-items: center;
-}
-
-/* Allow HTML page styles to take precedence */
-[data-html-content] {
-  all: revert;
+/* Ensure sidebar matches content height */
+.sidebar {
+  min-height: 70vh;
+  height: 100%;
 }
 
 /* Animation for dropdown menus */
@@ -182,4 +135,14 @@ h3, h4, h5, h6 {
 
 .toggle-icon.rotate-180 {
   transform: rotate(180deg);
+}
+
+/* Utility classes */
+.min-h-70vh {
+  min-height: 70vh;
+}
+
+/* Allow HTML page styles to take precedence */
+[data-html-content] {
+  all: revert;
 }
