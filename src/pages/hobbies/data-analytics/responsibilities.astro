@@ -1,0 +1,15 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+
+// Get the current path for active link highlighting
+const currentPath = Astro.url.pathname;
+
+// Get the content and headings
+const content = await Astro.glob('../../../content/hobbies/data-analytics/responsibilities.md');
+const pageContent = content[0];
+const headings = pageContent.getHeadings();
+---
+
+<MainLayout title="Data Analyst Responsibilities - Portfolio" headings={headings} currentPath={currentPath}>
+  <pageContent.Content />
+</MainLayout>

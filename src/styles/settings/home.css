@@ -1,0 +1,41 @@
+/* Page-specific settings for the home page */
+
+/* Custom font sizes for home page */
+.home-heading {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.home-subheading {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Custom spacing for home page sections */
+.home-section {
+  margin-bottom: 2.5rem;
+}
+
+/* Custom styling for featured content on home page */
+.featured-content {
+  border-left: 4px solid var(--primary-teal);
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+}
+
+/* Responsive adjustments for home page */
+@media (max-width: 768px) {
+  .home-heading {
+    font-size: 2rem;
+  }
+
+  .home-subheading {
+    font-size: 1.5rem;
+  }
+
+  .featured-content {
+    border-left-width: 3px;
+  }
+}

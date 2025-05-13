@@ -1,0 +1,17 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import '../styles/settings/experience.css';
+
+// Get the current path for active link highlighting
+const currentPath = Astro.url.pathname;
+
+// Get the content and headings
+const content = await Astro.glob('../content/experience.md');
+const pageContent = content[0];
+const headings = pageContent.getHeadings();
+---
+
+<MainLayout title="Experience - Portfolio" headings={headings} currentPath={currentPath}>
+  <link rel="stylesheet" href="/styles/settings/experience.css" slot="head" />
+  <pageContent.Content />
+</MainLayout>
