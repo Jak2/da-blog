@@ -1,17 +1,13 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import '../styles/settings/home.css';
+import { readHTML } from '../utils/read-html.js';
 
-// Get the current path for active link highlighting
 const currentPath = Astro.url.pathname;
-
-// Get the content and headings
-const content = await Astro.glob('../content/home.md');
-const pageContent = content[0];
-const headings = pageContent.getHeadings();
+const html = readHTML('./src/content/html/home.html'); // Adjust path as needed
 ---
 
-<MainLayout title="Home - Portfolio" headings={headings} currentPath={currentPath}>
+<MainLayout title="Home - Portfolio" headings={[]} currentPath={currentPath}>
   <link rel="stylesheet" href="/styles/settings/home.css" slot="head" />
-  <pageContent.Content />
+  <Fragment set:html={html} />
 </MainLayout>

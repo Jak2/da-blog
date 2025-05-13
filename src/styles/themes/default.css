@@ -1,0 +1,44 @@
+/* Default theme variables */
+:root {
+  --primary-blue: #005ac8;
+  --primary-teal: #00d1bf;
+  --background-color: #f2f2f2;
+  --text-color: #333333;
+  --sidebar-width: 18rem;
+  --sidebar-bg: #ffffff;
+  --sidebar-text: #333333;
+  --sidebar-hover: #f6f6f6;
+  --sidebar-active: #f6f6f6;
+  --sidebar-muted: #757575;
+  --content-bg-primary: #005ac8;
+  --content-bg-secondary: #00d1bf;
+  --content-text: #ffffff;
+  --footer-bg: #333333;
+  --footer-text: #ffffff;
+  --footer-link-hover: #00d1bf;
+  --header-bg: #ffffff;
+  --header-text: #333333;
+  --header-active: #005ac8;
+}
+
+/* Dark theme variables - can be enabled with a theme toggle */
+.dark-theme {
+  --primary-blue: #1a6fd1;
+  --primary-teal: #0fdbc9;
+  --background-color: #121212;
+  --text-color: #f5f5f5;
+  --sidebar-bg: #1e1e1e;
+  --sidebar-text: #f5f5f5;
+  --sidebar-hover: #2d2d2d;
+  --sidebar-active: #2d2d2d;
+  --sidebar-muted: #a0a0a0;
+  --content-bg-primary: #1a6fd1;
+  --content-bg-secondary: #0fdbc9;
+  --content-text: #ffffff;
+  --footer-bg: #1e1e1e;
+  --footer-text: #f5f5f5;
+  --footer-link-hover: #0fdbc9;
+  --header-bg: #1e1e1e;
+  --header-text: #f5f5f5;
+  --header-active: #1a6fd1;
+}

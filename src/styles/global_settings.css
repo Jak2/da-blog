@@ -2,13 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import theme */
+@import "./themes/default.css";
+
 /* Global settings for the entire site */
 :root {
-  --primary-blue: #005ac8;
-  --primary-teal: #00d1bf;
-  --background-color: #f2f2f2;
-  --text-color: #333333;
-  --sidebar-width: 18rem;
   --header-height: 4rem;
   --footer-height: 6rem;
   --content-max-width: 1200px;
@@ -63,7 +61,7 @@ body {
 .prose p {
   margin-top: 1rem;
   margin-bottom: 1rem;
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
 
 .prose ul {
@@ -76,6 +74,7 @@ body {
 .prose li {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+  font-size: 0.8rem;
 }
 
 /* Make section 1 scrollable */
@@ -126,6 +125,6 @@ body {
 }
 
 /* Utility classes */
-.max-h-70vh {
-  max-height: 70vh;
+.min-h-70vh {
+  min-height: 70vh;
 }

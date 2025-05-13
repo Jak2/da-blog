@@ -12,7 +12,7 @@ const { headings = [] } = Astro.props;
       <ul class="list-disc pl-5 mb-6 space-y-2">
         {headings.map((heading) => (
           <li>
-            <a href={`#${heading.slug}`} class="hover:underline">
+            <a href={`#${heading.slug}`} class="hover:underline text-[0.8rem]">
               {heading.text}
             </a>
           </li>
@@ -25,7 +25,7 @@ const { headings = [] } = Astro.props;
   <div id="url-section">
     <h3 class="text-xl mb-3">Links</h3>
     <ul class="list-disc pl-5 space-y-2" id="url-list">
-      <li>Loading links...</li>
+      <li class="text-[0.8rem]">Loading links...</li>
     </ul>
   </div>
 </div>
@@ -44,6 +44,7 @@ const { headings = [] } = Astro.props;
       if (links.length > 0) {
         links.forEach(link => {
           const li = document.createElement('li');
+          li.className = 'text-[0.8rem]';
           const a = document.createElement('a');
           a.href = link.href;
           a.textContent = link.textContent || link.href;
@@ -54,6 +55,7 @@ const { headings = [] } = Astro.props;
       } else {
         // If no links were found
         const li = document.createElement('li');
+        li.className = 'text-[0.8rem]';
         li.textContent = 'No links found in content';
         urlList.appendChild(li);
       }
