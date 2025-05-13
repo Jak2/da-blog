@@ -1,0 +1,19 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"],
+
+  "compilerOptions": {
+  // ... other compiler options
+  "jsx": "react-jsx", // Or "react" depending on your setup
+  "esModuleInterop": true, // Often required for React interop
+  "allowJs": true,       // If you have mixed JS/TS files (optional, but often helpful)
+  "skipLibCheck": true,    // Can help with some type definition issues (optional)
+  "forceConsistentCasingInFileNames": true, // Recommended for consistency
+  "noEmit": true,          // Prevents TypeScript from emitting JS files (if another tool handles it)
+  "strict": true,          // Enable strict type checking (recommended)
+  "moduleResolution": "node", // Or "bundler" depending on your setup
+  "resolveJsonModule": true, // To allow importing JSON files
+  "isolatedModules": true,  
+  }
+}

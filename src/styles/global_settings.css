@@ -1,0 +1,148 @@
+/* Import Inter font */
+@import '@fontsource/inter';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import theme */
+@import "./themes/default.css";
+
+/* Global settings for the entire site */
+:root {
+  --header-height: 4rem;
+  --footer-height: 6rem;
+  --content-max-width: 1200px;
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.5rem;
+  --border-radius-lg: 1rem;
+  --border-radius-xl: 2rem;
+  --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Base styles */
+html,
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
+  color: #000000;
+  line-height: 1.6;
+}
+
+/* Global text sizes */
+p, li, .nav-item, .side-nav-item, a {
+  font-size: 0.8em;
+}
+
+/* Sub headings */
+h2 {
+   color: #333333;
+}
+
+h3, h4, h5, h6 {
+  color: #9ca3af; /* Tailwind gray-400 */
+}
+
+/* Prose styling for markdown content */
+.prose {
+  max-width: 65ch;
+  color: inherit;
+}
+
+.prose a {
+  color: #00d1bf;
+  text-decoration: underline;
+}
+
+.prose h1 {
+  font-size: 2.25rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: #000000;
+}
+
+.prose h2 {
+  color: #333333;
+}
+
+ .prose h3, .prose h4, .prose h5, .prose h6 {
+  color: #9ca3af;
+}
+
+.prose h2 {
+  font-size: 1.875rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.prose h3 {
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.prose p {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.8em;
+}
+
+.prose ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.prose li {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.8em;
+}
+
+/* Make section 1 scrollable */
+.overflow-y-auto {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.overflow-y-auto::-webkit-scrollbar {
+  width: 6px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+/* Ensure sidebar matches content height */
+.sidebar {
+  min-height: 70vh;
+  height: 100%;
+}
+
+/* Animation for dropdown menus */
+.toggle-icon {
+  transition: transform 0.2s ease;
+}
+
+.toggle-icon.rotate-180 {
+  transform: rotate(180deg);
+}
+
+/* Utility classes */
+.min-h-70vh {
+  min-height: 70vh;
+}
+
+/* Allow HTML page styles to take precedence */
+[data-html-content] {
+  all: revert;
+}

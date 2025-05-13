@@ -1,0 +1,13 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import '../styles/settings/home.css';
+import { readHTML } from '../utils/read-html.js';
+
+const currentPath = Astro.url.pathname;
+const html = readHTML('./src/content/html/home.html'); // Adjust path as needed
+---
+
+<MainLayout title="Home - Portfolio" headings={[]} currentPath={currentPath}>
+  <link rel="stylesheet" href="/styles/settings/home.css" slot="head" />
+  <Fragment set:html={html} />
+</MainLayout>
