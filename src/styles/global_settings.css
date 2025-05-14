@@ -1,5 +1,5 @@
 /* Import Inter font */
-@import "@fontsource/inter";
+/* @import "@fontsource/inter"; */
 
 @tailwind base;
 @tailwind components;
@@ -23,23 +23,22 @@
 /* Base styles */
 html,
 body {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
     "Helvetica Neue", sans-serif;
   color: #000000;
   line-height: 1.6;
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden; /* Prevent double scrollbars */
 }
 
 /* Global text sizes */
 p,
-li,
+ul,
 .nav-item,
 .side-nav-item,
 a {
-  font-size: 0.8em;
+  font-size: 1em;
 }
 
 /* Sub headings */
@@ -62,8 +61,8 @@ h6 {
 }
 
 .prose a {
-  color: #00d1bf;
-  text-decoration: underline;
+  color: #000000;
+  text-decoration: none;
 }
 
 .prose h1 {
@@ -115,6 +114,30 @@ h6 {
   font-size: 0.8em;
 }
 
+/* Dark mode prose styles */
+.dark .prose {
+  color: #f5f5f5;
+}
+
+.dark .prose h1 {
+  color: #f5f5f5;
+}
+
+.dark .prose h2 {
+  color: #e5e5e5;
+}
+
+.dark .prose h3,
+.dark .prose h4,
+.dark .prose h5,
+.dark .prose h6 {
+  color: #d1d5db;
+}
+
+.dark .prose a {
+  color: #0fdbc9;
+}
+
 /* Improved scrollbar styling */
 .overflow-y-auto {
   scrollbar-width: thin;
@@ -134,11 +157,11 @@ h6 {
   border-radius: 3px;
 }
 
-.dark-theme .overflow-y-auto {
+.dark .overflow-y-auto {
   scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
-.dark-theme .overflow-y-auto::-webkit-scrollbar-thumb {
+.dark .overflow-y-auto::-webkit-scrollbar-thumb {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
@@ -176,4 +199,9 @@ h6 {
 .prose-invert {
   font-size: 1rem;
   line-height: 1.6;
+}
+
+/* Dark mode prose */
+.dark .prose-dark {
+  color: #f5f5f5;
 }

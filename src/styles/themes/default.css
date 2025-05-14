@@ -3,7 +3,7 @@
 /* Default theme variables */
 :root {
   --primary-blue: #005ac8;
-  --primary-teal: #00d1bf;
+  /* --primary-teal: #00d1bf; */
   --background-color: #f2f2f2;
   --text-color: #000000;
   --sidebar-width: 18rem;
