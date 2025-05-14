@@ -3,16 +3,16 @@ const { headings = [] } = Astro.props;
 ---
 
 <div>
-  <h2 class="text-2xl font-bold mb-6">Table of Contents</h2>
+  <h2 class="text-2xl font-bold mb-6 dark:text-white">Table of Contents</h2>
 
   <!-- Headings Section -->
   {headings && headings.length > 0 && (
     <div>
-      <h3 class="text-xl mb-3">Headings</h3>
+      <h3 class="text-xl mb-3 dark:text-gray-200">Headings</h3>
       <ul class="list-disc pl-5 mb-6 space-y-2">
         {headings.map((heading) => (
           <li>
-            <a href={`#${heading.slug}`} class="hover:underline text-[0.8rem]">
+            <a href={`#${heading.slug}`} class="hover:underline text-[0.8rem] dark:text-gray-300">
               {heading.text}
             </a>
           </li>
@@ -23,9 +23,9 @@ const { headings = [] } = Astro.props;
 
   <!-- URLs Section - This will be populated client-side -->
   <div id="url-section">
-    <h3 class="text-xl mb-3">Links</h3>
+    <h3 class="text-xl mb-3 dark:text-gray-200">Links</h3>
     <ul class="list-disc pl-5 space-y-2" id="url-list">
-      <li class="text-[0.8rem]">Loading links...</li>
+      <li class="text-[0.8rem] dark:text-gray-300">Loading links...</li>
     </ul>
   </div>
 </div>
@@ -44,7 +44,7 @@ const { headings = [] } = Astro.props;
       if (links.length > 0) {
         links.forEach(link => {
           const li = document.createElement('li');
-          li.className = 'text-[0.8rem]';
+          li.className = 'text-[0.8rem] dark:text-gray-300';
           const a = document.createElement('a');
           a.href = link.href;
           a.textContent = link.textContent || link.href;
@@ -55,7 +55,7 @@ const { headings = [] } = Astro.props;
       } else {
         // If no links were found
         const li = document.createElement('li');
-        li.className = 'text-[0.8rem]';
+        li.className = 'text-[0.8rem] dark:text-gray-300';
         li.textContent = 'No links found in content';
         urlList.appendChild(li);
       }
