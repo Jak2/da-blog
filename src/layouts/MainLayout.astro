@@ -21,8 +21,8 @@ const currentTime = format(new Date(), 'HH:mm:ss');
   </head>
   <body>
     <div class="min-h-screen bg-[#f0f0f0] md:pb-4 dark:bg-gray-900 flex flex-col">
-      <!-- Navigation Bar -->
-      <div class="md:hidden sticky top-0 z-50"> <!-- Mobile Navigation Container -->
+      <!-- Mobile Navigation Container -->
+      <div class="md:hidden sticky top-0 z-50">
         <!-- Primary Navbar - Mobile -->
         <nav class="bg-white dark:bg-gray-800 h-14 px-4 flex items-center justify-between shadow-lg">
           <div class="flex items-center space-x-4">
@@ -48,7 +48,7 @@ const currentTime = format(new Date(), 'HH:mm:ss');
               </svg>
             </a>
           </div>
-          <button id="mobile-menu-button" class="p-2">
+          <button id="mobile-nav-button" class="p-2">
             <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
@@ -57,7 +57,7 @@ const currentTime = format(new Date(), 'HH:mm:ss');
 
         <!-- Secondary Navbar - Mobile -->
         <div class="bg-white dark:bg-gray-800 h-12 px-4 flex items-center border-t border-gray-200 dark:border-gray-700 shadow-lg">
-          <button id="mobile-nav-button" class="flex items-center space-x-2 text-gray-600 dark:text-gray-300">
+          <button id="mobile-menu-button" class="flex items-center space-x-2 text-gray-600 dark:text-gray-300">
             <span>Menu</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M19 9l-7 7-7-7"></path>
@@ -118,7 +118,38 @@ const currentTime = format(new Date(), 'HH:mm:ss');
         </div>
       </nav>
 
-      <!-- Mobile Menu -->
+      <!-- Mobile Navigation Menu -->
+      <div id="mobile-nav-menu" class="fixed inset-0 z-40 hidden">
+        <div class="fixed inset-0 bg-black bg-opacity-50" id="mobile-nav-overlay"></div>
+        <div class="fixed inset-y-0 right-0 w-64 bg-white dark:bg-gray-800 shadow-xl transform transition-transform duration-300 translate-x-full" id="mobile-nav-content">
+          <div class="p-4">
+            <div class="flex justify-between items-center mb-4">
+              <h2 class="text-lg font-semibold">Navigation</h2>
+              <button id="close-nav-menu" class="p-2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 6L6 18M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
+            <div class="space-y-4">
+              <a href="/" class={`block p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 ${currentPath === '/' ? 'bg-gray-100 dark:bg-gray-700' : ''}`}>
+                Home
+              </a>
+              <a href="/skills" class={`block p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 ${currentPath === '/skills' ? 'bg-gray-100 dark:bg-gray-700' : ''}`}>
+                Skills
+              </a>
+              <a href="/experience" class={`block p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 ${currentPath === '/experience' ? 'bg-gray-100 dark:bg-gray-700' : ''}`}>
+                Experience
+              </a>
+              <a href="/projects" class={`block p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 ${currentPath === '/projects' ? 'bg-gray-100 dark:bg-gray-700' : ''}`}>
+                Projects
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Sidebar Menu -->
       <div id="mobile-menu" class="fixed inset-0 z-40 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-50" id="mobile-menu-overlay"></div>
         <div class="fixed inset-y-0 left-0 w-[80%] max-w-sm bg-white dark:bg-gray-800 shadow-xl transform transition-transform duration-300 translate-x-[-100%]" id="mobile-menu-content">
@@ -161,9 +192,39 @@ const currentTime = format(new Date(), 'HH:mm:ss');
     </div>
 
     <script>
-      // Mobile menu functionality
-      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      // Mobile navigation menu functionality
       const mobileNavButton = document.getElementById('mobile-nav-button');
+      const mobileNavMenu = document.getElementById('mobile-nav-menu');
+      const mobileNavContent = document.getElementById('mobile-nav-content');
+      const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
+      const closeNavMenu = document.getElementById('close-nav-menu');
+
+      function toggleNavMenu() {
+        const isOpen = !mobileNavMenu.classList.contains('hidden');
+        
+        if (isOpen) {
+          // Close menu
+          mobileNavContent.style.transform = 'translateX(100%)';
+          setTimeout(() => {
+            mobileNavMenu.classList.add('hidden');
+          }, 300);
+        } else {
+          // Open menu
+          mobileNavMenu.classList.remove('hidden');
+          setTimeout(() => {
+            mobileNavContent.style.transform = 'translateX(0)';
+          }, 10);
+        }
+      }
+
+      [mobileNavButton, closeNavMenu, mobileNavOverlay].forEach(element => {
+        if (element) {
+          element.addEventListener('click', toggleNavMenu);
+        }
+      });
+
+      // Mobile sidebar menu functionality
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
       const mobileMenu = document.getElementById('mobile-menu');
       const mobileMenuContent = document.getElementById('mobile-menu-content');
       const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
@@ -186,11 +247,9 @@ const currentTime = format(new Date(), 'HH:mm:ss');
         }
       }
 
-      [mobileMenuButton, mobileNavButton].forEach(button => {
-        if (button) {
-          button.addEventListener('click', toggleMobileMenu);
-        }
-      });
+      if (mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+      }
 
       if (mobileMenuOverlay) {
         mobileMenuOverlay.addEventListener('click', toggleMobileMenu);
@@ -243,6 +302,18 @@ const currentTime = format(new Date(), 'HH:mm:ss');
       // Initial call and set interval
       updateTime();
       setInterval(updateTime, 1000);
+
+      // Make all links in the mobile menus clickable
+      document.querySelectorAll('#mobile-nav-content a, #mobile-menu-content a').forEach(link => {
+        link.addEventListener('click', () => {
+          // Close the respective menu after clicking a link
+          if (link.closest('#mobile-nav-content')) {
+            toggleNavMenu();
+          } else if (link.closest('#mobile-menu-content')) {
+            toggleMobileMenu();
+          }
+        });
+      });
     </script>
   </body>
 </html>
