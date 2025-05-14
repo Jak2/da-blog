@@ -1,27 +1,30 @@
+/* Update the theme variables to support dark mode better */
+
 /* Default theme variables */
 :root {
   --primary-blue: #005ac8;
   --primary-teal: #00d1bf;
   --background-color: #f2f2f2;
-  --text-color: #333333;
+  --text-color: #000000;
   --sidebar-width: 18rem;
   --sidebar-bg: #ffffff;
-  --sidebar-text: #333333;
+  --sidebar-text: #000000;
   --sidebar-hover: #f6f6f6;
   --sidebar-active: #f6f6f6;
   --sidebar-muted: #757575;
-  --content-bg-primary: #005ac8;
+  --content-bg-primary: #ffffff;
   --content-bg-secondary: #00d1bf;
-  --content-text: #ffffff;
+  --content-text: #000000;
   --footer-bg: #333333;
   --footer-text: #ffffff;
   --footer-link-hover: #00d1bf;
   --header-bg: #ffffff;
-  --header-text: #333333;
+  --header-text: #000000;
   --header-active: #005ac8;
+  --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
-/* Dark theme variables - can be enabled with a theme toggle */
+/* Dark theme variables */
 .dark-theme {
   --primary-blue: #1a6fd1;
   --primary-teal: #0fdbc9;
@@ -32,7 +35,7 @@
   --sidebar-hover: #2d2d2d;
   --sidebar-active: #2d2d2d;
   --sidebar-muted: #a0a0a0;
-  --content-bg-primary: #1a6fd1;
+  --content-bg-primary: #1e1e1e;
   --content-bg-secondary: #0fdbc9;
   --content-text: #ffffff;
   --footer-bg: #1e1e1e;
@@ -41,4 +44,39 @@
   --header-bg: #1e1e1e;
   --header-text: #f5f5f5;
   --header-active: #1a6fd1;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Dark theme body and text styles */
+.dark-theme body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.dark-theme .prose {
+  color: var(--text-color);
+}
+
+.dark-theme .prose h1,
+.dark-theme .prose h2,
+.dark-theme .prose h3,
+.dark-theme .prose p,
+.dark-theme .prose li {
+  color: var(--text-color);
+}
+
+.dark-theme .bg-white {
+  background-color: var(--sidebar-bg);
+}
+
+.dark-theme .text-[#757575] {
+  color: var(--sidebar-muted);
+}
+
+.dark-theme .bg-[#f6f6f6] {
+  background-color: var(--sidebar-hover);
+}
+
+.dark-theme .hover\:bg-[#f6f6f6]:hover {
+  background-color: var(--sidebar-hover);
 }
