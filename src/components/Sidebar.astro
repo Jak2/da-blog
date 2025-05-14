@@ -9,8 +9,8 @@ const isActive = (path) => {
 };
 ---
 
-<div class="w-full md:w-72 bg-white rounded-lg shadow-lg overflow-hidden">
-  <div class="p-6 border-b border-[#f6f6f6]">
+<div class="w-full md:w-72 bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-y-auto  max-h-screen">
+  <div class="p-6 py-0 border-b border-[#f6f6f6]">
     <div class="flex items-center gap-4">
       <a href="/">
         <img src="/images/profile.png" alt="Profile" width="60" height="60" class="rounded-full" />
@@ -22,7 +22,7 @@ const isActive = (path) => {
     </div>
   </div>
 
-  <div class="p-4">
+  <div class="p-4 h-full overflow-y-auto">
     <div class="text-xs text-[#757575] uppercase mb-2 px-2">ABOUT ME</div>
     <div class="space-y-1">
       <a href="/" class={`flex items-center p-2 ${isActive('/') ? 'bg-[#f6f6f6]' : 'hover:bg-[#f6f6f6]'} rounded-md cursor-pointer`}>
