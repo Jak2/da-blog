@@ -18,6 +18,27 @@ const currentTime = format(new Date(), 'HH:mm:ss');
     <title>{title || 'Portfolio Website'}</title>
     <link rel="stylesheet" href="/styles/global_settings.css" />
     <slot name="head" />
+      
+    <!-- Cat eye tracking script -->
+    <script>
+      document.addEventListener('mousemove', (e) => {
+        const eyes = document.querySelectorAll('.cat-eye');
+        if (!eyes.length) return;
+        
+        eyes.forEach(eye => {
+          const rect = eye.parentElement.getBoundingClientRect();
+          const eyeX = rect.left + rect.width / 2;
+          const eyeY = rect.top + rect.height / 2;
+          
+          const angle = Math.atan2(e.clientY - eyeY, e.clientX - eyeX);
+          const eyeMove = 3; // pixels the eyes can move
+          
+          const x = Math.cos(angle) * eyeMove;
+          const y = Math.sin(angle) * eyeMove;
+          eye.style.transform = `translate(${x}px, ${y}px)`;
+        });
+      });
+    </script>
   </head>
   <body>
     <div class="min-h-screen bg-[#f0f0f0] md:pb-4 dark:bg-gray-900 flex flex-col">
@@ -83,6 +104,7 @@ const currentTime = format(new Date(), 'HH:mm:ss');
               <a href="/projects" class={`hover:text-[#005ac8] dark:hover:text-[#1a6fd1] text-[0.8em] ${currentPath === '/projects' ? 'text-[#005ac8] dark:text-[#1a6fd1]' : 'dark:text-white'}`}>
                 Projects
               </a>
+                {/* Add more navigation items here */}
             </>
           ) : (
             <div class="text-[0.8em] text-gray-600 dark:text-gray-300" id="current-time">{currentDate} | {currentTime}</div>
@@ -90,6 +112,7 @@ const currentTime = format(new Date(), 'HH:mm:ss');
         </div>
       
         <div class="flex items-center space-x-4">
+           {/* Cat eyes, theme toggle, social links */}
           <div class="cat-image relative w-10 h-5 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
             <div class="cat-eye absolute top-[35%] left-[30%] w-2 h-2 bg-black dark:bg-white rounded-full"></div>
             <div class="cat-eye absolute top-[35%] right-[30%] w-2 h-2 bg-black dark:bg-white rounded-full"></div>
@@ -122,9 +145,9 @@ const currentTime = format(new Date(), 'HH:mm:ss');
       <div id="mobile-nav-menu" class="fixed inset-0 z-40 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-50" id="mobile-nav-overlay"></div>
         <div class="fixed inset-y-0 right-0 w-64 bg-white dark:bg-gray-800 shadow-xl transform transition-transform duration-300 translate-x-full" id="mobile-nav-content">
-          <div class="p-4">
+          <div class="p-4 mt-28">
             <div class="flex justify-between items-center mb-4">
-              <h2 class="text-lg font-semibold">Navigation</h2>
+              <h2 class="text-lg font-semibold"></h2>
               <button id="close-nav-menu" class="p-2">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M18 6L6 18M6 6l12 12"></path>
@@ -152,7 +175,7 @@ const currentTime = format(new Date(), 'HH:mm:ss');
       <!-- Mobile Sidebar Menu -->
       <div id="mobile-menu" class="fixed inset-0 z-40 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-50" id="mobile-menu-overlay"></div>
-        <div class="fixed inset-y-0 left-0 w-[80%] max-w-sm bg-white dark:bg-gray-800 shadow-xl transform transition-transform duration-300 translate-x-[-100%]" id="mobile-menu-content">
+        <div class="fixed inset-y-0 left-0 w-[80%] max-w-sm bg-white dark:bg-gray-800 prose prose-invert dark:prose-dark mt-24 shadow-xl transform transition-transform duration-300 translate-x-[-100%]" id="mobile-menu-content">
           <div class="h-full overflow-y-auto">
             <Sidebar currentPath={currentPath} />
           </div>
@@ -162,15 +185,15 @@ const currentTime = format(new Date(), 'HH:mm:ss');
       <!-- Main content area -->
       <div class="flex-1 flex flex-col md:flex-row gap-6 my-6 px-4 md:px-8">
         <!-- Sidebar - Hidden on mobile, shown on desktop -->
-        <div class="hidden md:block md:w-72 flex-shrink-0">
+        <div class="hidden md:block prose prose-invert dark:prose-dark  md:w-72 flex-shrink-0">
           <Sidebar currentPath={currentPath} />
         </div>
         
-        <!-- Main Content -->
-        <div class="flex-1 flex flex-col">
-          <div class="flex flex-col md:flex-row flex-1 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
-            <!-- Content Section -->
-            <div class={`w-full ${!isHomePage && headings.length > 0 ? 'md:w-3/4' : ''} overflow-y-auto`}>
+        <!-- Main Content - Scrollable -->
+        <div class="flex-1 flex flex-col ">
+          <div class="flex flex-col md:flex-row flex-1 p-2 bg-white dark:bg-gray-800 rounded-lg mb-4 shadow-lg">
+            <!-- Section 1: Content (Scrollable) -->
+            <div class={`w-full ${!isHomePage && headings.length > 0 ? 'md:w-3/4' : ''} overflow-y-auto max-h-[calc(100vh)]`}>
               <div class="p-6 md:p-8">
                 <div class="prose prose-invert dark:prose-dark max-w-none">
                   <slot />
@@ -180,7 +203,7 @@ const currentTime = format(new Date(), 'HH:mm:ss');
             
             <!-- Table of Contents - Hidden on mobile -->
             {!isHomePage && headings.length > 0 && (
-              <div class="hidden md:block w-1/4 p-6 md:p-8 border-l border-gray-200 dark:border-gray-700">
+              <div class="hidden md:block w-1/4 p-6 md:p-8 overflow-y-auto max-h-[calc(100vh)] border-l border-gray-200 dark:border-gray-700">
                 <TableOfContents headings={headings} />
               </div>
             )}
@@ -304,6 +327,47 @@ const currentTime = format(new Date(), 'HH:mm:ss');
       setInterval(updateTime, 1000);
 
       // Make all links in the mobile menus clickable
+           // Submenu toggles
+      document.addEventListener('DOMContentLoaded', () => {
+        const toggleButtons = document.querySelectorAll('.toggle-btn');
+        
+        toggleButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const submenu = button.nextElementSibling;
+            
+            if (submenu && submenu.classList.contains('submenu')) {
+              if (!submenu.classList.contains('hidden')) {
+                submenu.classList.add('hidden');
+                const icon = button.querySelector('.toggle-icon');
+                if (icon) {
+                  icon.classList.remove('rotate-180');
+                }
+                return;
+              }
+              
+              document.querySelectorAll('.submenu').forEach(menu => {
+                if (menu !== submenu) {
+                  menu.classList.add('hidden');
+                  const parentButton = menu.previousElementSibling;
+                  if (parentButton) {
+                    const parentIcon = parentButton.querySelector('.toggle-icon');
+                    if (parentIcon) {
+                      parentIcon.classList.remove('rotate-180');
+                    }
+                  }
+                }
+              });
+              
+              submenu.classList.remove('hidden');
+              const icon = button.querySelector('.toggle-icon');
+              if (icon) {
+                icon.classList.add('rotate-180');
+              }
+            }
+          });
+        });
+      });
+    
       document.querySelectorAll('#mobile-nav-content a, #mobile-menu-content a').forEach(link => {
         link.addEventListener('click', () => {
           // Close the respective menu after clicking a link
