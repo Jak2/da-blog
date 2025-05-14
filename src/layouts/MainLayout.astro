@@ -20,23 +20,13 @@ const currentTime = format(new Date(), 'HH:mm:ss');
     <slot name="head" />
   </head>
   <body>
-    <div class="min-h-screen bg-[#f0f0f0] dark:bg-gray-900 flex flex-col">
-      <!-- Top Navigation Bar - Always visible -->
-      <nav class="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-lg">
-        <!-- Primary Navbar -->
-        <div class="px-4 h-14 flex items-center justify-between border-b border-gray-200 dark:border-gray-700">
-          <!-- Left side - Empty for desktop, Menu button for mobile -->
-          <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
-            <span class="sr-only">Open menu</span>
-            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-
-          <!-- Right side - Icons -->
+    <div class="min-h-screen bg-[#f0f0f0] md:pb-4 dark:bg-gray-900 flex flex-col">
+      <!-- Navigation Bar -->
+      <div class="md:hidden sticky top-0 z-50"> <!-- Mobile Navigation Container -->
+        <!-- Primary Navbar - Mobile -->
+        <nav class="bg-white dark:bg-gray-800 h-14 px-4 flex items-center justify-between shadow-lg">
           <div class="flex items-center space-x-4">
             <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
-              <span class="sr-only">Toggle theme</span>
               <svg class="sun-icon hidden dark:block" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="12" cy="12" r="5"></circle>
                 <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
@@ -45,14 +35,12 @@ const currentTime = format(new Date(), 'HH:mm:ss');
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
               </svg>
             </button>
-            <a href="https://github.com" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700" target="_blank" rel="noopener">
-              <span class="sr-only">GitHub</span>
+            <a href="https://github.com" class="p-2" target="_blank" rel="noopener">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
               </svg>
             </a>
-            <a href="https://linkedin.com" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700" target="_blank" rel="noopener">
-              <span class="sr-only">LinkedIn</span>
+            <a href="https://linkedin.com" class="p-2" target="_blank" rel="noopener">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
                 <rect x="2" y="9" width="4" height="12"></rect>
@@ -60,10 +48,15 @@ const currentTime = format(new Date(), 'HH:mm:ss');
               </svg>
             </a>
           </div>
-        </div>
+          <button id="mobile-menu-button" class="p-2">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </nav>
 
-        <!-- Secondary Navbar - Mobile Menu Button -->
-        <div class="md:hidden px-4 h-12 flex items-center border-b border-gray-200 dark:border-gray-700">
+        <!-- Secondary Navbar - Mobile -->
+        <div class="bg-white dark:bg-gray-800 h-12 px-4 flex items-center border-t border-gray-200 dark:border-gray-700 shadow-lg">
           <button id="mobile-nav-button" class="flex items-center space-x-2 text-gray-600 dark:text-gray-300">
             <span>Menu</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -71,9 +64,61 @@ const currentTime = format(new Date(), 'HH:mm:ss');
             </svg>
           </button>
         </div>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex sticky top-0 z-50 bg-white dark:bg-gray-800 rounded-full mx-auto px-4 sm:px-4 md:px-6 md:py-2 items-center justify-between mt-8 mb-6 shadow-lg">
+        <div class="flex items-center space-x-4 overflow-x-auto mr-6 scrollbar-hide">
+          {isHomePage ? (
+            <>
+              <a href="/" class={`hover:text-[#005ac8] dark:hover:text-[#1a6fd1] text-[0.8em] ${currentPath === '/' ? 'text-[#005ac8] dark:text-[#1a6fd1]' : 'dark:text-white'}`}>
+                Home
+              </a>
+              <a href="/skills" class={`hover:text-[#005ac8] dark:hover:text-[#1a6fd1] text-[0.8em] ${currentPath === '/skills' ? 'text-[#005ac8] dark:text-[#1a6fd1]' : 'dark:text-white'}`}>
+                Skills
+              </a>
+              <a href="/experience" class={`hover:text-[#005ac8] dark:hover:text-[#1a6fd1] text-[0.8em] ${currentPath === '/experience' ? 'text-[#005ac8] dark:text-[#1a6fd1]' : 'dark:text-white'}`}>
+                Experience
+              </a>
+              <a href="/projects" class={`hover:text-[#005ac8] dark:hover:text-[#1a6fd1] text-[0.8em] ${currentPath === '/projects' ? 'text-[#005ac8] dark:text-[#1a6fd1]' : 'dark:text-white'}`}>
+                Projects
+              </a>
+            </>
+          ) : (
+            <div class="text-[0.8em] text-gray-600 dark:text-gray-300" id="current-time">{currentDate} | {currentTime}</div>
+          )}
+        </div>
+      
+        <div class="flex items-center space-x-4">
+          <div class="cat-image relative w-10 h-5 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+            <div class="cat-eye absolute top-[35%] left-[30%] w-2 h-2 bg-black dark:bg-white rounded-full"></div>
+            <div class="cat-eye absolute top-[35%] right-[30%] w-2 h-2 bg-black dark:bg-white rounded-full"></div>
+          </div>
+          <button id="theme-toggle-desktop" class="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
+            <svg class="sun-icon hidden dark:block" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"></circle>
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+            </svg>
+            <svg class="moon-icon block dark:hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+          <a href="https://github.com" class="dark:text-white" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+          </a>
+          <a href="https://linkedin.com" class="dark:text-white" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
+        </div>
       </nav>
 
-      <!-- Mobile Navigation Menu -->
+      <!-- Mobile Menu -->
       <div id="mobile-menu" class="fixed inset-0 z-40 hidden">
         <div class="fixed inset-0 bg-black bg-opacity-50" id="mobile-menu-overlay"></div>
         <div class="fixed inset-y-0 left-0 w-[80%] max-w-sm bg-white dark:bg-gray-800 shadow-xl transform transition-transform duration-300 translate-x-[-100%]" id="mobile-menu-content">
@@ -84,7 +129,7 @@ const currentTime = format(new Date(), 'HH:mm:ss');
       </div>
 
       <!-- Main content area -->
-      <div class="flex-1 flex flex-col md:flex-row gap-6 p-4 md:p-8">
+      <div class="flex-1 flex flex-col md:flex-row gap-6 my-6 px-4 md:px-8">
         <!-- Sidebar - Hidden on mobile, shown on desktop -->
         <div class="hidden md:block md:w-72 flex-shrink-0">
           <Sidebar currentPath={currentPath} />
@@ -152,28 +197,52 @@ const currentTime = format(new Date(), 'HH:mm:ss');
       }
 
       // Theme toggle functionality
-      const themeToggle = document.getElementById('theme-toggle');
-      
-      if (themeToggle) {
-        // Check for saved theme preference or use system preference
-        const savedTheme = localStorage.getItem('theme');
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      function setupThemeToggle(buttonId) {
+        const themeToggle = document.getElementById(buttonId);
         
-        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
-          document.documentElement.classList.add('dark');
+        if (themeToggle) {
+          themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            
+            // Save preference
+            if (document.documentElement.classList.contains('dark')) {
+              localStorage.setItem('theme', 'dark');
+            } else {
+              localStorage.setItem('theme', 'light');
+            }
+          });
         }
-        
-        themeToggle.addEventListener('click', () => {
-          document.documentElement.classList.toggle('dark');
-          
-          // Save preference
-          if (document.documentElement.classList.contains('dark')) {
-            localStorage.setItem('theme', 'dark');
-          } else {
-            localStorage.setItem('theme', 'light');
-          }
-        });
       }
+
+      // Setup theme toggles for both mobile and desktop
+      setupThemeToggle('theme-toggle');
+      setupThemeToggle('theme-toggle-desktop');
+
+      // Check for saved theme preference or use system preference
+      const savedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+        document.documentElement.classList.add('dark');
+      }
+
+      // Update time every second
+      function updateTime() {
+        const timeElement = document.getElementById('current-time');
+        if (timeElement) {
+          const now = new Date();
+          const options = { month: 'long', day: 'numeric', year: 'numeric' };
+          const dateStr = now.toLocaleDateString('en-US', options);
+          const hours = String(now.getHours()).padStart(2, '0');
+          const minutes = String(now.getMinutes()).padStart(2, '0');
+          const seconds = String(now.getSeconds()).padStart(2, '0');
+          timeElement.textContent = `${dateStr} | ${hours}:${minutes}:${seconds}`;
+        }
+      }
+      
+      // Initial call and set interval
+      updateTime();
+      setInterval(updateTime, 1000);
     </script>
   </body>
 </html>
